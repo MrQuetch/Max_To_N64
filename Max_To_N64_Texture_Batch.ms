@@ -73,7 +73,7 @@
 	-- textures
 	for k = 1 to selection.count do
 		(
-		aBitmap = (openBitmap selection[k].material.diffusemap.filename)
+		aBitmap = (openBitmap selection[k].material.diffusemap.fileName)
 
 		aHeight = aBitmap.height
 		aWidth = aBitmap.width
@@ -81,7 +81,7 @@
 		count = 0
 
 		format "// %x% \n" (aHeight) (aWidth) to:fStream
-		format "unsigned int %[] = \n" (getFilenameFile(aBitmap.filename)) to:fStream
+		format "unsigned int %[] = \n" (getFilenameFile(aBitmap.fileName)) to:fStream
 		format "    { \n" to:fStream
 
 		for i = 0 to (aHeight-1) do
@@ -96,27 +96,27 @@
 				
 				if (aPixelColor[1] < 16) then
 					(
-					format "0%" (toUpper (bit.intAsHex(aPixelColor[1]))) to:fStream
+					format "0%" (bit.intAsHex(aPixelColor[1])) to:fStream
 					)
 				else
 					(
-					format "%" (toUpper (bit.intAsHex(aPixelColor[1]))) to:fStream
+					format "%" (bit.intAsHex(aPixelColor[1])) to:fStream
 					)
 				if (aPixelColor[2] < 16) then
 					(
-					format "0%" (toUpper (bit.intAsHex(aPixelColor[2]))) to:fStream
+					format "0%" (bit.intAsHex(aPixelColor[2])) to:fStream
 					)
 				else
 					(
-					format "%" (toUpper (bit.intAsHex(aPixelColor[2]))) to:fStream
+					format "%" (bit.intAsHex(aPixelColor[2])) to:fStream
 					)
 				if (aPixelColor[3] < 16) then
 					(
-					format "0%" (toUpper (bit.intAsHex(aPixelColor[3]))) to:fStream
+					format "0%" (bit.intAsHex(aPixelColor[3])) to:fStream
 					)
 				else
 					(
-					format "%" (toUpper (bit.intAsHex(aPixelColor[3]))) to:fStream
+					format "%" (bit.intAsHex(aPixelColor[3])) to:fStream
 					)
 				
 				format "FF," to:fStream
@@ -145,7 +145,7 @@
 	-- triangles
 	for i = 1 to selection.count do
 		(
-		aBitmap = (openBitmap selection[i].material.diffusemap.filename)
+		aBitmap = (openBitmap selection[i].material.diffusemap.fileName)
 		
 		aHeight = aBitmap.height
 		aWidth = aBitmap.width
@@ -160,7 +160,7 @@
 		format "    gsSPSetGeometryMode(G_ZBUFFER|G_CULL_BACK|G_SHADE|G_SHADING_SMOOTH|G_TEXTURE_GEN|G_TEXTURE_GEN_LINEAR), \n" to:fStream
 		format " \n" to:fStream
 		format "    gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON), \n" to:fStream
-		format "    gsDPLoadTextureBlock(%, G_IM_FMT_RGBA, G_IM_SIZ_32b, %, %, 0, \n" (getFilenameFile(aBitmap.filename)) (aHeight) (aWidth) to:fStream
+		format "    gsDPLoadTextureBlock(%, G_IM_FMT_RGBA, G_IM_SIZ_32b, %, %, 0, \n" (getFilenameFile(aBitmap.fileName)) (aHeight) (aWidth) to:fStream
 		format "                                   G_TX_WRAP | G_TX_MIRROR, G_TX_WRAP | G_TX_MIRROR, \n" to:fStream
 		format "                                   5, 5, G_TX_NOLOD, G_TX_NOLOD), \n" to:fStream -- still need to change the '5, 5,' for other image sizes
 		format " \n" to:fStream
